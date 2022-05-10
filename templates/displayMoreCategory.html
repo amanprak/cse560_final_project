@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Welcome</title>
+	<link rel="stylesheet" href={{ url_for('static', filename='css/home.css' ) }} />
+	<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css' ) }} />
+</head>
+
+<body>
+	<div id="title">
+		<div id="logoContainer">
+
+			<a href="/">
+				<img id="logo" src={{ url_for('static', filename='images/logo.svg' ) }} />
+			</a>
+		</div>
+
+
+		<div id="projectTitle">
+			<h1>CSE 560 DMQL FINAL PROJECT: E-Commerce Website</h1>
+		</div>
+
+
+		{% if not loggedIn %}
+		<div id="signInButton">
+			<a class="link" href="/loginForm">Sign In</a>
+		</div>
+		{% else %}
+		<div class="dropdown">
+			<button class="dropbtn">Hello, <br>{{firstName}}</button>
+			<div class="dropdown-content">
+				<!-- <a href="/account/orders">Your orders</a> -->
+				<a href="/account/profile">Your profile</a>
+				<hr>
+				<a href="/logout">Sign Out</a>
+			</div>
+		</div>
+		{% endif %}
+		<div id="cart">
+			<a class="link" href="/cart">
+				<img src={{url_for('static', filename='images/shoppingCart.png' )}} id="cartIcon" />
+				CART {{Item_Count}}
+			</a>
+		</div>
+	</div>
+	<div class="display">
+		<div class="displayCategory">
+			<h2>Shop by Category: </h2>
+			<ul>
+				{% for row in categoryData %}
+				<li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
+				{% endfor %}
+				<!-- <li><a href="/displayMoreCategory">View More Categories...</a></li> -->
+			</ul>
+		</div>
+
+	</div>
+</body>
+
+</html>
